@@ -35,6 +35,12 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
+                            @if (auth()->user()->is_admin)
+                                <x-dropdown-link :href="route('blv.index')">
+                                    {{ __('Error Log') }}
+                                </x-dropdown-link>
+                            @endif
+
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
