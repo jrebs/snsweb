@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Series;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +14,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('series_directors', function (Blueprint $table) {
+        Schema::create('races', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('series_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignIdFor(Series::class)->constrained();
+            $table->string('name');
+            $table->timestamp('date');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('series_directors');
+        Schema::dropIfExists('races');
     }
 };

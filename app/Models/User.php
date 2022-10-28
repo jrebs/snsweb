@@ -58,4 +58,14 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
     {
         return $this->belongsToMany(Series::class, 'series_directors');
     }
+
+    /**
+     * Get all of the incidents the driver is associated with.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function incidents(): BelongsToMany
+    {
+        return $this->belongsToMany(Incident::class, 'incidents_drivers');
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Race;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +14,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('series_drivers', function (Blueprint $table) {
+        Schema::create('incidents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('series_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignIdFor(Race::class)->constrained();
+            $table->time('session_time');
+            $table->string('comment');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('series_drivers');
+        Schema::dropIfExists('incidents');
     }
 };
