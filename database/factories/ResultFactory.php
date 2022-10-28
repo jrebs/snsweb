@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\WithFaker;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Race>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Result>
  */
-class RaceFactory extends Factory
+class ResultFactory extends Factory
 {
     use WithFaker;
 
@@ -20,8 +20,8 @@ class RaceFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker()->unique()->name(),
-            'date' => $this->faker()->date(),
+            'start' => $this->faker()->numberBetween(1, 30),
+            'finish' => $this->faker()->numberBetween(1, 30),
         ];
     }
 }

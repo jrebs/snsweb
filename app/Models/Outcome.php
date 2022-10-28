@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Review extends Model implements Auditable
+class Outcome extends Model implements Auditable
 {
     use HasFactory;
     use AuditableTrait;

@@ -14,31 +14,16 @@ class Series extends Model implements Auditable
     use HasFactory;
     use AuditableTrait;
 
-    /**
-     * Get drivers registered to this series.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function drivers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'series_drivers');
     }
 
-    /**
-     * Get directors of this series.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function directors(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'series_directors');
     }
 
-    /**
-     * Get all of the races for this series.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function races(): HasMany
     {
         return $this->hasMany(Race::class);

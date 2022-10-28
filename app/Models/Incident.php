@@ -6,28 +6,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use OwenIt\Auditing\Auditable as AuditableTrait;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Incident extends Model
+class Incident extends Model implements Auditable
 {
     use HasFactory;
+    use AuditableTrait;
 
-    /**
-     * Get the race this incident took place in.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function race(): BelongsTo
     {
         return $this->belongsTo(Race::class);
     }
 
-    /**
-     * Get all the drivers involved in the incident.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function drivers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'incidents_drivers');
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
     }
 }

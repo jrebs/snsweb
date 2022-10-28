@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Review extends Model implements Auditable
+class Result extends Model implements Auditable
 {
     use HasFactory;
     use AuditableTrait;
 
-    public function incident(): BelongsTo
+    public function race(): BelongsTo
     {
-        return $this->belongsTo(Incident::class);
+        return $this->belongsTo(Race::class);
     }
 
     public function user(): BelongsTo

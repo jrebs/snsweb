@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -39,33 +40,28 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Get all of the series in which this user is registered as a driver.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function series(): BelongsToMany
     {
         return $this->belongsToMany(Series::class, 'series_drivers');
     }
 
-    /**
-     * Get all of the series this user directs.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function directorships(): BelongsToMany
     {
         return $this->belongsToMany(Series::class, 'series_directors');
     }
 
-    /**
-     * Get all of the incidents the driver is associated with.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
+    public function results(): HasMany
+    {
+        return $this->hasMany(Result::class);
+    }
+
     public function incidents(): BelongsToMany
     {
         return $this->belongsToMany(Incident::class, 'incidents_drivers');
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
     }
 }

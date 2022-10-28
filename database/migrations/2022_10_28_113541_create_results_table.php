@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Incident;
-use app\Models\User;
+use App\Models\Race;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,12 +15,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Incident::class)->constrained();
-            $table->foreignIdFor(User::class)->constrained();
-            $table->string('comment');
-            $table->string('private_comment')->nullable();
+            $table->foreignIdFor(Race::class);
+            $table->foreignIdFor(User::class);
+            $table->unsignedTinyInteger('start');
+            $table->unsignedTinyInteger('finish');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('results');
     }
 };
