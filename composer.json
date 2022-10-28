@@ -1,7 +1,7 @@
 {
-    "name": "jrebs/snsapp",
+    "name": "jrebs/snsweb",
     "type": "project",
-    "description": "SNS league administration app.",
+    "description": "SNS league administration web interface",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
