@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Only allow admins to access the /log-viewer routes
         LogViewer::auth(function (Request $request) {
-            return $request->user() && $request->user()->is_admin;
+            return $request->user() && $request->user()->hasRole('admin');
         });
     }
 }

@@ -35,7 +35,7 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
-                            @if (auth()->user()->is_admin)
+                            @if (auth()->user()->hasRole('admin'))
                                 <x-dropdown-link :href="route('blv.index')">
                                     {{ __('Error Log') }}
                                 </x-dropdown-link>
