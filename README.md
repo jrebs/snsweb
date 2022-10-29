@@ -18,6 +18,12 @@ created with an email address of `{role}@example.com` (for example
 ```
 php artisan db:seed --class=UserSeeder
 ```
+For testing or demonstration purposes, you can also seed the database with
+some sample data, including a series with a director and 10 drivers with
+one race results recorded.
+```
+php artisan db:seed --class=TestSeeder
+```
 
 ## TODO
 
