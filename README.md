@@ -25,6 +25,13 @@ one race results recorded.
 php artisan db:seed --class=TestSeeder
 ```
 
+## Deploying to Production
+Assuming your `.env` is set up correctly:
+```
+composer install
+npm run build
+```
+
 ## TODO
 
 * Times translated to user-defined timezones

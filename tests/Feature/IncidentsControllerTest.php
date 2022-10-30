@@ -2,18 +2,17 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\User;
-use App\Models\Incident;
 use App\Models\Race;
 use App\Models\Series;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class IncidentsControllerTest extends TestCase
 {
-    use WithFaker;
     use RefreshDatabase;
+    use WithFaker;
 
     /**
      * A basic feature test example.
@@ -31,21 +30,36 @@ class IncidentsControllerTest extends TestCase
     {
         /** @var \App\Models\User */
         $user = User::factory()->create();
+
+        // A test expected to succeed.
         $race = Race::factory()->create([
             'series_id' => Series::factory()->create()->id,
             'date' => now()->subDay(),
         ]);
-        $response = $this->actingAs($user)->post(route('incidents.store'), [
+        $this->actingAs($user)->post(route('incidents.store'), [
             'race_id' => $race->id,
             'session_time' => $this->faker()->time('H:i'),
             'comment' => $this->faker()->sentence(),
-        ])->assertOk();
+        ])->assertCreated();
+
+        // It's been too long to file a protest.
         $race2 = Race::factory()->create([
             'series_id' => Series::factory()->create()->id,
             'date' => now()->subDay(3),
         ]);
-        $response = $this->actingAs($user)->post(route('incidents.store'), [
+        $this->actingAs($user)->post(route('incidents.store'), [
             'race_id' => $race2->id,
+            'session_time' => $this->faker()->time('H:i'),
+            'comment' => $this->faker()->sentence(),
+        ])->assertSessionHasErrors('race_id');
+
+        // The event hasn't happened yet.
+        $race3 = Race::factory()->create([
+            'series_id' => Series::factory()->create()->id,
+            'date' => now()->addDay(),
+        ]);
+        $this->actingAs($user)->post(route('incidents.store'), [
+            'race_id' => $race3->id,
             'session_time' => $this->faker()->time('H:i'),
             'comment' => $this->faker()->sentence(),
         ])->assertSessionHasErrors('race_id');

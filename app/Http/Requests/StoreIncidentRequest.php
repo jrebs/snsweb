@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\IncidentWindowOpen;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreIncidentRequest extends FormRequest
 {
@@ -27,10 +27,8 @@ class StoreIncidentRequest extends FormRequest
         return [
             'race_id' => [
                 'required',
-                Rule::exists('races', 'id')->where(function ($query) {
-                    return $query->where('date', '<', now())
-                        ->where('date', '>', now()->subDays(2));
-                }),
+                'exists:races,id',
+                new IncidentWindowOpen(),
             ],
             'session_time' => ['date_format:H:i'],
             'comment' => ['required'],

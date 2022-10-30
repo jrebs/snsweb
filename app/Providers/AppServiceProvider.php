@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -45,7 +44,9 @@ class AppServiceProvider extends ServiceProvider
         // Admin users are authorized for all policy abilities.
         // https://laravel.com/docs/9.x/authorization#intercepting-gate-checks
         Gate::before(function ($user, $ability) {
-            return $user->hasRole('admin');
+            if ($user->hasRole('admin')) {
+                return true;
+            }
         });
     }
 }

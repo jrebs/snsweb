@@ -18,7 +18,7 @@ class IncidentPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -28,9 +28,9 @@ class IncidentPolicy
      * @param  \App\Models\Incident  $incident
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Incident $incident)
+    public function view(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class IncidentPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class IncidentPolicy
      */
     public function update(User $user, Incident $incident)
     {
-        return ($user->id == $incident->id) || ($incident->race->series->directors->contains($user));
+        return $incident->race->series->directors->contains($user);
     }
 
     /**
