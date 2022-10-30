@@ -20,9 +20,9 @@ class Incident extends Model implements Auditable
         return $this->belongsTo(Race::class);
     }
 
-    public function drivers(): BelongsToMany
+    public function driver(): BelongsTo
     {
-        return $this->belongsToMany(User::class, 'incidents_drivers');
+        return $this->belongsTo(User::class);
     }
 
     public function reviews(): HasMany

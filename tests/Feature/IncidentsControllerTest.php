@@ -30,6 +30,9 @@ class IncidentsControllerTest extends TestCase
     {
         /** @var \App\Models\User */
         $user = User::factory()->create();
+        $series = Series::factory()->create();
+        $driver = User::factory()->create();
+        $series->drivers()->save($driver);
 
         // A test expected to succeed.
         $race = Race::factory()->create([
@@ -40,6 +43,7 @@ class IncidentsControllerTest extends TestCase
             'race_id' => $race->id,
             'session_time' => $this->faker()->time('H:i'),
             'comment' => $this->faker()->sentence(),
+            'user_id' => $driver->id,
         ])->assertCreated();
 
         // It's been too long to file a protest.
@@ -51,6 +55,7 @@ class IncidentsControllerTest extends TestCase
             'race_id' => $race2->id,
             'session_time' => $this->faker()->time('H:i'),
             'comment' => $this->faker()->sentence(),
+            'user_id' => $driver->id,
         ])->assertSessionHasErrors('race_id');
 
         // The event hasn't happened yet.
@@ -62,6 +67,7 @@ class IncidentsControllerTest extends TestCase
             'race_id' => $race3->id,
             'session_time' => $this->faker()->time('H:i'),
             'comment' => $this->faker()->sentence(),
+            'user_id' => $driver->id,
         ])->assertSessionHasErrors('race_id');
     }
 }

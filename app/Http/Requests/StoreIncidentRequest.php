@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\IncidentWindowOpen;
+use App\Rules\RaceIsProtestable;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreIncidentRequest extends FormRequest
@@ -17,6 +17,13 @@ class StoreIncidentRequest extends FormRequest
         return true;
     }
 
+    public function messages()
+    {
+        return [
+            'session_time' => 'The time format must be MM:SS',
+        ];
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,9 +35,10 @@ class StoreIncidentRequest extends FormRequest
             'race_id' => [
                 'required',
                 'exists:races,id',
-                new IncidentWindowOpen(),
+                new RaceIsProtestable(),
             ],
-            'session_time' => ['date_format:H:i'],
+            'user_id' => ['required', 'exists:users,id'],
+            'session_time' => ['required', 'regex:/^\d+\:\d{2}$/'],
             'comment' => ['required'],
         ];
     }

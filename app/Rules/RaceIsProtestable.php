@@ -4,8 +4,9 @@ namespace App\Rules;
 
 use App\Models\Race;
 use Illuminate\Contracts\Validation\InvokableRule;
+use Illuminate\Support\Facades\Log;
 
-class IncidentWindowOpen implements InvokableRule
+class RaceIsProtestable implements InvokableRule
 {
     /**
      * Run the validation rule.
@@ -17,11 +18,8 @@ class IncidentWindowOpen implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        $race = Race::find($value);
-        if ($race->date > now()) {
-            $fail('Race date is in the future');
-        } elseif ($race->date < now()->subDay(2)) {
-            $fail('The incident-filing window has lapsed');
+        if (!Race::protestable()->pluck('id')->contains($value)) {
+            $fail('Race no longer eligible for incident reviews');
         }
     }
 }

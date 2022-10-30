@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\IncidentController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +27,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resources([
         'incidents' => IncidentController::class,
+        'users'     => UserController::class,
     ]);
+    Route::get('/drivers', function () {
+        return User::whereHas('series')->paginate(15);
+    });
+    Route::get('/stewards', function () {
+        return User::role('steward')->paginate(15);
+    });
 });
 
 require __DIR__.'/auth.php';

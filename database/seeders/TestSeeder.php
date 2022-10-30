@@ -30,7 +30,10 @@ class TestSeeder extends Seeder
         $series->directors()->save($director);
         $drivers = $series->drivers()->saveMany(User::factory($numDrivers)->make());
         /** @var \App\Models\Race */
-        $race = Race::factory()->create(['series_id' => $series->id]);
+        $race = Race::factory()->create([
+            'series_id' => $series->id,
+            'date' => now()->subHour(),
+        ]);
         for ($i = 0; $i < $numDrivers; $i++) {
             Result::create([
                 'race_id' => $race->id,
@@ -40,10 +43,9 @@ class TestSeeder extends Seeder
             ]);
         }
         $incident = $race->incidents()->saveMany(
-            Incident::factory(1)->make()
+            Incident::factory(1)->make([
+                'user_id' => $race->results()->inRandomOrder()->first()->id
+            ])
         )[0];
-        $incident->drivers()->saveMany(
-            $race->results()->inRandomOrder()->limit(2)->get()
-        );
     }
 }

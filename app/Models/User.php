@@ -55,9 +55,9 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
         return $this->hasMany(Result::class);
     }
 
-    public function incidents(): BelongsToMany
+    public function incidents(): HasMany
     {
-        return $this->belongsToMany(Incident::class, 'incidents_drivers');
+        return $this->hasMany(Incident::class);
     }
 
     public function reviews(): HasMany
