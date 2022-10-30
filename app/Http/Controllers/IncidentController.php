@@ -34,7 +34,7 @@ class IncidentController extends Controller
      */
     public function create(Request $request)
     {
-        return view('incidents.edit', [
+        return view('incidents.create', [
             'incident' => new Incident(),
             'races' => Race::protestable()->get(),
             'drivers' => User::whereHas('series')->orderBy('number')->get(),
