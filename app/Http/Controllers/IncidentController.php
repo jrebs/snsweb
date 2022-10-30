@@ -23,7 +23,7 @@ class IncidentController extends Controller
      */
     public function index()
     {
-        //
+        return view('incidents.index', ['incidents' => Incident::get()]);
     }
 
     /**
@@ -49,10 +49,9 @@ class IncidentController extends Controller
      */
     public function store(StoreIncidentRequest $request)
     {
-        $validated = $request->validated();
-        $incident = Incident::create($validated);
+        $incident = Incident::create($request->validated());
 
-        return $incident;
+        return redirect(route('incidents.show', $incident));
     }
 
     /**
@@ -63,7 +62,7 @@ class IncidentController extends Controller
      */
     public function show(Incident $incident)
     {
-        return $incident->with('reviews')->get();
+        return $incident;
     }
 
     /**
@@ -85,13 +84,15 @@ class IncidentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreIncidentRequest  $request
      * @param  \App\Models\Incident  $incident
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Incident $incident)
+    public function update(StoreIncidentRequest $request, Incident $incident)
     {
-        //
+        $incident->update($request->validated());
+
+        return redirect(route('incidents.show', $incident));
     }
 
     /**
@@ -102,6 +103,8 @@ class IncidentController extends Controller
      */
     public function destroy(Incident $incident)
     {
-        //
+            $incident->deleteOrFail();
+
+            return redirect(route('incidents.index'));
     }
 }

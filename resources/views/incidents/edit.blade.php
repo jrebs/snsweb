@@ -11,6 +11,13 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <x-incident-form :incident="$incident" :races="$races" :drivers="$drivers" />
                 </div>
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <form action="{{ route('incidents.destroy', $incident) }}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <input type="submit" value="Delete" onClick="return confirm('Delete record?');" />
+                    </form>
+                </div>
             </div>
         </div>
     </div>

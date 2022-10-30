@@ -34,6 +34,11 @@ class TestSeeder extends Seeder
             'series_id' => $series->id,
             'date' => now()->subHour(),
         ]);
+        // A second protest candidate race to populate the protest form
+        Race::factory()->create([
+            'series_id' => $series->id,
+            'date' => now()->subDay()
+        ]);
         for ($i = 0; $i < $numDrivers; $i++) {
             Result::create([
                 'race_id' => $race->id,
