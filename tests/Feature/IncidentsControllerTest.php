@@ -2,12 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
+use Tests\TestCase;
 use App\Models\Race;
+use App\Models\User;
 use App\Models\Series;
+use App\Models\Incident;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
 class IncidentsControllerTest extends TestCase
 {
@@ -39,12 +40,14 @@ class IncidentsControllerTest extends TestCase
             'series_id' => Series::factory()->create()->id,
             'date' => now()->subDay(),
         ]);
+        $initialCount = Incident::count();
         $this->actingAs($user)->post(route('incidents.store'), [
             'race_id' => $race->id,
             'session_time' => $this->faker()->time('H:i'),
             'comment' => $this->faker()->sentence(),
             'user_id' => $driver->id,
-        ])->assertCreated();
+        ])->assertRedirect();
+        $this->assertEquals($initialCount + 1, Incident::count());
 
         // It's been too long to file a protest.
         $race2 = Race::factory()->create([
