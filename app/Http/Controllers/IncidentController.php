@@ -62,7 +62,11 @@ class IncidentController extends Controller
      */
     public function show(Incident $incident)
     {
-        return $incident;
+        return view('incidents.show', [
+            'incident' => $incident,
+            'race' => $incident->race()->first(),
+            'series' => $incident->race()->first()->series()->first(),
+        ]);
     }
 
     /**

@@ -53,7 +53,9 @@ class IncidentPolicy
      */
     public function update(User $user, Incident $incident)
     {
-        return $incident->race->series->directors->contains($user);
+        return $incident->user == $user || $incident->race()->first()
+            ->series()->first()
+            ->directors()->get()->contains($user);
     }
 
     /**

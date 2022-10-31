@@ -10,8 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     @foreach ($incidents as $incident)
-                        {{ $incident->id }}: {{ $incident->comment }}
-                        <a href="{{ route('incidents.edit', $incident) }}">Edit</a>
+                        <a href="{{ route('incidents.show', $incident) }}">
+                            {{ $incident->id }}: {{ $incident->comment }}
+                        </a>
                         <br/>
                     @endforeach
                 </div>
