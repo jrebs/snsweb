@@ -1,0 +1,116 @@
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #333;
+    /* background-color: lightgray; */
+    overflow: hidden;
+    margin-bottom: 5px;
+  }
+
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    /* color: #000; */
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    /* background-color: #ddd; */
+    background-color: #fff;
+    color: black;
+  }
+
+  /* Add an active class to highlight the current page */
+  .topnav a.active {
+    background-color: #b6160b;
+    color: white;
+  }
+
+  /* Hide the link that should open and close the topnav on small screens */
+  .topnav .icon {
+    display: none;
+  }
+
+  /* Media Queries */
+
+  /* When the screen is less than X pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+  @media screen and (max-width: 750px) {
+    .topnav a:not(.active) {display: none;}
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+  }
+
+  /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+  @media screen and (max-width: 750px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive a.icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  }
+
+  textarea.u-full-height {
+    height: 25vh;
+  }
+
+  @media (min-width: 400px) {
+    #myTopnav {
+      margin-top: 0;
+    }
+  }
+  @media (min-width: 750px) {
+    #myTopnav {
+      margin-top: 10%;
+    }
+  }
+
+
+  /* Overrides from skeleton.css for Briefcase */
+
+  /* Larger than mobile */
+  @media (min-width: 400px) {
+    .container {
+      width: 100%;
+    }
+  }
+
+  /* Larger than phablet (also point when grid becomes active) */
+  @media (min-width: 550px) {
+    .container {
+      width: 100%;
+    }
+  }
+
+  /* Larger than tablet */
+  @media (min-width: 750px) {
+    .container {
+      width: 80%;
+    }
+  }
+
+  /* Larger than desktop */
+  @media (min-width: 1000px) {
+    .container {
+      width: 80%;
+    }
+  }
+
+  /* Larger than Desktop HD */
+  @media (min-width: 1200px) {
+    .container {
+      width: 80%;
+    }
+  }

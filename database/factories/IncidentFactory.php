@@ -20,7 +20,7 @@ class IncidentFactory extends Factory
     public function definition()
     {
         return [
-            'session_time' => $this->faker()->time(),
+            'session_time' => $this->faker()->time('H:i'),
             'comment' => $this->faker->sentence(),
         ];
     }
