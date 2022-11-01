@@ -1,57 +1,40 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Login') }}
+        </h2>
+    </x-slot>
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-input-label for="email" :value="__('Email')" />
-
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+        <div class="row">
+            <div class="one-half column">
+                <input type="email" id="email" name="email" class="u-full-width" value="{{ old('email') }}" autocomplete="email" required placeholder="E-mail Address"/>
             </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
-
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <div class="one-half column">
+                <input type="password" id="password" name="password" class="u-full-width" required autocomplete="current-password" placeholder="Password"/>
             </div>
+        </div>
 
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
+        {{-- <div class="row">
+            <div class="u-pull-left">
+                <input type="checkbox" name="remember" id="remember" value="{{ old('remember') }}"/>&nbsp;
             </div>
+            <div class="u-pull-left">
+                <label for="remember">{{ __('Remember Me') }}</label>
+            </div>
+        </div> --}}
+        <div class="u-cf"></div>
 
-            <div class="flex items-center justify-end mt-4">
+        <div class="row">
+            <div class="six columns">
+                <button class="button-primary u-full-width" type="submit" name="submit">{{ __('Login') }}</button>
+            </div>
+            <div class="six columns">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
+                    <a class="button u-full-width" href="{{ route('password.request') }}">{{  __('Forgot Your Password?') }}</a>
                 @endif
-
-                <x-primary-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-primary-button>
             </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+        </div>
+    </form>
+</x-app-layout>

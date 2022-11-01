@@ -1,0 +1,79 @@
+@import '/css/normalize.css';
+@import '/css/skeleton.css';
+@import '/css/nav.css';
+
+/* Customizations on top of Skeleton */
+.button.button-warning,
+button.button-warning,
+input[type="submit"].button-warning,
+input[type="reset"].button-warning,
+input[type="button"].button-warning {
+  color: #FFF;
+  background-color: #E03333;
+  border-color: #E03333; }
+.button.button-warning:hover,
+button.button-warning:hover,
+input[type="submit"].button-warning:hover,
+input[type="reset"].button-warning:hover,
+input[type="button"].button-warning:hover,
+.button.button-warning:focus,
+button.button-warning:focus,
+input[type="submit"].button-warning:focus,
+input[type="reset"].button-warning:focus,
+input[type="button"].button-warning:focus {
+  color: #FFF;
+  background-color: #E03333;
+  border-color: #E03333; }
+
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  height: 35px;
+  line-height: 35px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+th, td {
+  padding: 0;
+}
+
+a.button {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+/* Customize error and notice boxes */
+div.error-message {
+  background-color: rgb(245, 182, 182);
+}
+div.status-message {
+  background-color: rgb(200, 241, 201);
+}
+div.status-message, div.error-message {
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: black;
+}
+
+li {
+  margin: 0;
+}
+
+.elapsed {
+  background-color: rgb(226, 32, 32);
+  color: white;
+  font-weight: bold;
+  padding: 2px;
+}
+
+a {
+    color:rgb(226, 32, 32);
+}
+a:hover {
+    color:rgb(226, 32, 32);
+}
