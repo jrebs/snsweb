@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <form method="POST" action="{{ route('password.update') }}">
+    <form method="POST" action="{{ route('password.email') }}">
         @csrf
         <div class="row">
             <div class="one-half column">

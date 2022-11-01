@@ -14,7 +14,7 @@
                 <label for="email">{{ __('E-Mail Address') }}</label>
             </div>
             <div class="four columns">
-                <input id="email" type="email" class="u-full-width" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                <input id="email" type="email" class="u-full-width" name="email" value="{{ $request->input('email') ?? old('email') }}" required autocomplete="email" autofocus>
             </div>
         </div>
 
