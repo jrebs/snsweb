@@ -17,22 +17,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
+
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::middleware(['auth'])->group(function () {
-    Route::resources([
-        'incidents' => IncidentController::class,
-        'users'     => UserController::class,
-        'series'    => SeriesController::class,
+Route::get('/drivers', function () {
+    return view('drivers', [
+        'drivers' => User::whereHas('series')->get()
     ]);
+})->name('drivers');
 
-    Route::get('/drivers', function () {
-        return view('drivers', [
-            'drivers' => User::whereHas('series')->get()
-        ]);
-    })->name('drivers');
-});
+Route::resource('users', UserController::class);
+
+Route::resource('series', SeriesController::class);
+
+Route::resource('incidents', IncidentController::class)
+    ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
